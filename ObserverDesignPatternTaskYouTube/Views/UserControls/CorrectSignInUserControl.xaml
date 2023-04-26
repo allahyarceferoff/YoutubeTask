@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="ObserverDesignPatternTaskYouTube.Views.UserControls.CorrectSignInUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ObserverDesignPatternTaskYouTube.Views.UserControls" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             Width="900" Height="400" Background="White" x:Name="mo">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="Blue" Offset="1"></GradientStop>
+                <GradientStop Color="DeepSkyBlue" Offset="0.5"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Canvas>
+            <ListBox Canvas.Left="150" Canvas.Top="5" Width="600" DisplayMemberPath="{Binding Youtuber.Name}" SelectedItem="{Binding SelectedItemListBox}" ItemsSource="{Binding ItemSource,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="190" Background="Blue">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Checked}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+
+            <ListBox Canvas.Left="150" Canvas.Bottom="5" Width="600" DisplayMemberPath="{Binding Youtuber.Name}" SelectedItem="{Binding SelectedItemListBoxUnsubscribe,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding ItemSourceUnsubscribe,Mode=OneWay}" Height="190" Background="Blue">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding UnChecked}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+
+            <Button Width="40" Style="{StaticResource allButtons}" Height="40" Canvas.Left="10" Canvas.Top="10" Command="{Binding BackButton,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="/Images/Back button.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Command="{Binding SharedChannelButtonClicked}" Width="130" Background="DeepSkyBlue" FontSize="9" FontStyle="Oblique" Content="Videos shared by your channels" Canvas.Top="55" Height="340" Canvas.Left="10">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Command="{Binding SharedChannelButtonClicked}" Width="130" Background="DeepSkyBlue" FontSize="9" FontStyle="Oblique" Content="Videos shared by your channels" Canvas.Top="55" Height="340" Canvas.Right="10">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </Canvas>
+    </Grid>
+</UserControl>
